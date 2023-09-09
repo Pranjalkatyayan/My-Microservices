@@ -6,6 +6,8 @@ import com.ratingService.Services.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,7 @@ public class RatingsController {
     @Autowired
     RatingService ratingService;
 
+    @PreAuthorize("hasAuthority('SCOPE_email')")
     @PostMapping("/addARatings")
     public ResponseEntity<Response> createARating(@RequestBody Rating rating){
         try{

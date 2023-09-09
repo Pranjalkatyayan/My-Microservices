@@ -14,3 +14,11 @@ spring:
           uri: https://github.com/Pranjalkatyayan/My-Configration-Files-For-All-Microservices
           clone-on-start : true
           default-label: dev-branch
+
+
+#Okta Configration
+okta :
+  oauth2:
+    issuer : https://dev-45386778.okta.com/oauth2/default
+    audience: api://default
+

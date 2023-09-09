@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Builder
 @Entity
 @Getter
 @Setter
@@ -14,8 +13,9 @@ import java.util.UUID;
 @Table(name="hotels")
 public class Hotel {
 
-    @Id
-    private String hotel_Id= UUID.randomUUID().toString();;
+    @Id()
+    @Column(name = "hotel_id")
+    private String hotelId= UUID.randomUUID().toString();
     private String name;
     private String location;
     private String about;

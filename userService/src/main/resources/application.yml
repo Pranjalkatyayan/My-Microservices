@@ -1,13 +1,13 @@
 server :
   port : 8084
 spring :
+
   application :
     name: USER-SERVICE
   datasource :
     url : jdbc:mysql://localhost:3306/microservices
     username : root
     password : root
-
   jpa :
     hibernate :
       ddl-auto : update
@@ -21,5 +21,62 @@ spring :
           clone-on-start : true
           default-label: dev-branch
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:  https://dev-45386778.okta.com/oauth2/default
+      client:
+        registration:
+          my-internal-client :
+            provider: okta
+            authorizationGrantType: client_credentials
+            scope: internal
+            clientId: 0oa8dfjkmr9c1CRda5d7
+            clientSecret: 9c4vDBDzB6Nf0RyB4-Cwo5WMi2fVX2IZ8tkSRlCc
+
+        provider:
+          okta :
+            issuerUri:  https://dev-45386778.okta.com/oauth2/default
+
+
 Rating-Service : "http://RATING-SERVICE/ratings/"
 Hotel-Service :  "http://HOTEL-SERVICE/hotels/"
+
+#Actuator Points
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+  endpoint:
+    health:
+      show-details: always
+
+#Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      ratingHotelBreaker:
+        failureRateThreshold : 5
+        slowCallRateThreshold : 25
+        slowCallDurationThreshold : 6000
+        permittedNumberOfCallsInHalfOpenState : 2
+        maxWaitDurationInHalfOpenState : 2000
+        slidingWindowType : COUNT_BASED
+        slidingWindowSize : 10
+        minimumNumberOfCalls : 1
+        waitDurationInOpenState : 6000
+        automaticTransitionFromOpenToHalfOpenEnabled : false
+        registerHealthIndicator: true
+
+#Okta Configration
+okta :
+  oauth2:
+    issuer: https://dev-45386778.okta.com/oauth2/default
+    audience: api://default
+

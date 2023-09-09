@@ -19,7 +19,7 @@ public class Users {
 
     @Id()
     @Column(name = "userID")
-    private String id= UUID.randomUUID().toString();
+    private String userId= UUID.randomUUID().toString();
 
     @Column(name = "Name" ,length = 20)
     private String name;

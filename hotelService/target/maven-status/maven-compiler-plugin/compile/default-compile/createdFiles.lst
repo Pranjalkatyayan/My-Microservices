@@ -1,4 +1,4 @@
-com\hotelService\Entity\Hotel$HotelBuilder.class
+com\hotelService\Config\SecurityConfig.class
 com\hotelService\Repository\HotelRepository.class
 com\hotelService\Services\HotelServiceImpl.class
 com\hotelService\Exception\GlobalExceptionHandler.class
@@ -11,4 +11,5 @@ com\hotelService\Controller\HotelController.class
 com\hotelService\Entity\Hotel.class
 com\hotelService\Payload\Response$ResponseBuilder.class
 com\hotelService\Services\HotelService.class
+com\hotelService\Config\ConfigClass.class
 com\hotelService\Controller\StaffController.class
